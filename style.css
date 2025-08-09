@@ -1,0 +1,165 @@
+/* 접근성용 스크린 리더 전용 클래스 */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* 기본 타이포그래피: 모바일 가독성 우선 */
+:root {
+  --bg: #ffffff;
+  --text: #111;
+  --muted: #6b7280;
+  --brand: #0ea5e9; /* 파란 톤 */
+  --card: #f8fafc;
+  --border: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR",
+               Segoe UI, Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* 상단 바 */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.brand img {
+  display: block;
+  width: 130px;
+  height: 100px;
+  object-fit: contain;
+}
+.brand-text {
+  font-weight: 700;
+  color: var(--brand);
+  font-size: 1.1rem; /* 모바일에서도 잘 보이도록 */
+  white-space: nowrap;
+}
+
+/* 검색 폼 */
+#searchForm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+#query {
+  padding: 10px 12px;
+  font-size: 1rem;
+  min-width: 200px;
+  max-width: 60vw;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+#query:focus {
+  outline: 2px solid #bae6fd;
+  border-color: #7dd3fc;
+}
+#searchBtn {
+  padding: 10px 14px;
+  font-size: 1rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#searchBtn:hover {
+  background: #0284c7;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 12px 48px;
+}
+
+/* 빈 상태는 별도 UI 없이 여백만 유지 */
+.empty { min-height: 24vh; }
+
+.hidden { display: none; }
+
+.result-count {
+  font-size: 1.05rem;
+  margin: 6px 0 12px;
+  color: var(--muted);
+}
+
+/* 결과 카드 */
+.results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.card dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 8px;
+  column-gap: 12px;
+}
+.card dt {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.card dd {
+  margin: 0;
+  font-size: 1.05rem; /* 휴대폰 가독성 확보 */
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 오류 영역 */
+#errorSection {
+  margin-top: 12px;
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #991b1b;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+/* 반응형 */
+@media (max-width: 640px) {
+  .brand-text { font-size: 1rem; }
+  #query { width: 52vw; font-size: 1.05rem; }
+  #searchBtn { font-size: 1.05rem; }
+  .card dd { font-size: 1.1rem; } /* 모바일에서 결과값 크게 */
+}
+
+@media (min-width: 900px) {
+  .results {
+    grid-template-columns: 1fr 1fr; /* 넓은 화면에서는 2열 */
+  }
+}
