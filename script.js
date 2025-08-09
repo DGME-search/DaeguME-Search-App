@@ -96,5 +96,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 페이지 로드 시 데이터 불러오기
     loadData();
-});
-});
+    });
